@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELearn - Assignment Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="app-header">
+        <h1>ELearn Tracker</h1>
+        <p>Gestionează-ți temele pe materii și dificultate.</p>
+        <p class="app-count">3 teme, dintre care 2 nepredate</p>
+    </header>
+    
+    <main class="container">
+        <!-- Formularul de adăugare -->
+        <section class="panel">
+            <h2>Adaugă temă</h2>
+            <form class="item-form">
+                <label>Titlu 
+                    <input type="text" name="titlu" placeholder="Ex: Proiect Tehnologii Web" />
+                </label>
+                <label>Dificultate
+                    <select name="dificultate">
+                        <option value="scazuta">Scăzută</option>
+                        <option value="medie">Medie</option>
+                        <option value="ridicata">Ridicată</option>
+                    </select>
+                </label>
+                <button type="submit">Adaugă</button>
+            </form>
+        </section>
+
+        <!-- Lista cu teme -->
+        <section class="panel">
+            <h2>Temele mele</h2>
+            <!-- Când lista e goală: <p class="empty">Nu există nicio temă.</p> -->
+            <ul class="item-list">
+                
+                <!-- Card 1: Activ (Nepredat) -->
+                <li class="item-card">
+                    <div>
+                        <h3>Stage 1 Mockup</h3>
+                        <span class="badge badge-medie">Medie</span>
+                    </div>
+                    <span class="status">Nepredat</span>
+                </li>
+
+                <!-- Card 2: Finalizat (Predat) - Are clasa 'done' -->
+                <li class="item-card done">
+                    <div>
+                        <h3>SQL Queries lab</h3>
+                        <span class="badge badge-ridicata">Ridicată</span>
+                    </div>
+                    <span class="status">Predat</span>
+                </li>
+
+                <!-- Card 3: Activ (Nepredat) -->
+                <li class="item-card">
+                    <div>
+                        <h3>Math Homework 3</h3>
+                        <span class="badge badge-scazuta">Scăzută</span>
+                    </div>
+                    <span class="status">Nepredat</span>
+                </li>
+
+            </ul>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        Proiect Tehnologii Web
+    </footer>
+    <script src="teme.js"></script>
+</body>
+</html>
