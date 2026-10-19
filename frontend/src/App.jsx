@@ -1,3 +1,5 @@
+import TemeList from "./components/TemeList.jsx";
+
 const teme = [
     { id: 1, titlu: "Stage 1 Mockup", predat: false, dificultate: "medie", materie: "WebTech" },
     { id: 2, titlu: "SQL Queries lab", predat: true, dificultate: "ridicata", materie: "Databases" },
@@ -20,7 +22,7 @@ export default function App() {
             <main className="container">
                 <section className="panel">
                     <h2>Temele mele</h2>
-                    <pre>{JSON.stringify(teme, null, 2)}</pre>
+                    <TemeList teme={teme} />
                 </section>
             </main>
         </>
