@@ -15,7 +15,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
         --bg: #14121d;
         --card: #1e1b2e;
         --text: #e5e7eb;
@@ -23,6 +23,15 @@
         --border: #352f4d;
         --accent-soft: #2a2342;
     }
+}
+
+:root[data-theme="dark"] {
+    --bg: #14121d;
+    --card: #1e1b2e;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #352f4d;
+    --accent-soft: #2a2342;
 }
 
 body {
@@ -34,6 +43,7 @@ body {
 }
 
 .app-header {
+    position: relative;
     background-color: var(--accent);
     color: #f5f5dc;
     text-align: center;
@@ -41,6 +51,21 @@ body {
 }
 .app-header h1 { margin: 0 0 8px 0; }
 .app-header p { margin: 0; }
+
+.theme-toggle {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.15); }
 
 .container {
     max-width: 1000px;
@@ -84,6 +109,20 @@ body {
     background: var(--accent-soft);
 }
 
+.item-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.item-main input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
 .item-card h3 {
     margin: 0 0 6px 0;
     font-size: 16px;
@@ -105,6 +144,20 @@ body {
 }
 .item-card.done .status {
     color: var(--muted);
+}
+
+.btn-danger {
+    border: 1px solid var(--color-ridicata);
+    background: transparent;
+    color: var(--color-ridicata);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font: inherit;
+    cursor: pointer;
+}
+.btn-danger:hover {
+    background: var(--color-ridicata);
+    color: #fff;
 }
 
 :focus-visible {
