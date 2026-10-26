@@ -1,0 +1,3 @@
+- Instrumente folosite: Google Gemini
+- Link conversație: [https://gemini.google.com/app/1041e5c895ba998d]
+- Scop: Gestionarea stării locale cu useState în App.jsx, implementarea funcțiilor imutabile pentru bifare (toggle) și ștergere, adăugarea comutării temei luminoase/întunecate.

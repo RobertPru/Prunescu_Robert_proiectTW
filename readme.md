@@ -40,3 +40,13 @@ The raw JSON list is replaced with React components (`TemaCard` and `TemeList`).
 | S4-R4 | finished item styled differently | [frontend/src/components/TemaCard.jsx]([https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/components/TemaCard.jsx]) | look at card |
 | S4-R5 | console free of warnings/errors | Console F12 | open F12 |
 | S4-R6 | README Stage 4 section + AI log | [README.md]([https://github.com/RobertPru/Prunescu_Robert_proiectTW/tree/main/frontend/ai-log])
+## Stage 5: local state and events
+The list lives in React state. Checking and deleting work from the page, and the counters in the header follow automatically. A button in the header switches between light and dark mode.
+
+## Stage 5: Checklist
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S5-R1 | list kept in useState, in App | [frontend/src/App.jsx#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/App.jsx) | read |
+| S5-R2 | toggling changes state and card look | [frontend/src/components/TemaCard.jsx#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/components/TemaCard.jsx) | click a checkbox |
+| S5-R5 | immutable updates (no push, splice, assignment) | [frontend/src/App.jsx#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/App.jsx) | read |
+| S5-R6 | light/dark toggle: state + data-theme on html |  [frontend/src/App.css#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/App.css) | click the button, both system themes |
