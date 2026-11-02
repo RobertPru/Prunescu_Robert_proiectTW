@@ -1,19 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TemeList from "./components/TemeList.jsx";
-
-const TEME_INITIALE = [
-    { id: 1, titlu: "Stage 1 Mockup", predat: false, dificultate: "medie", materie: "WebTech" },
-    { id: 2, titlu: "SQL Queries lab", predat: true, dificultate: "ridicata", materie: "Databases" },
-    { id: 3, titlu: "Math Homework 3", predat: false, dificultate: "scazuta", materie: "Math" }
-];
+import TemaForm from "./components/TemaForm.jsx";
+import { fetchTeme, addTema } from "./api.js";
 
 function temaInitiala() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export default function App() {
-    const [teme, setTeme] = useState(TEME_INITIALE);
+    const [teme, setTeme] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [tema, setTema] = useState(temaInitiala);
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function load() {
+            try {
+                const data = await fetchTeme();
+                if (!ignore) setTeme(data);
+            } catch (err) {
+                if (!ignore) setError(err.message);
+            } finally {
+                if (!ignore) setLoading(false);
+            }
+        }
+
+        load();
+        return () => { ignore = true; };
+    }, []);
+
+    async function handleAddTema(nouaTema) {
+        try {
+            const temaSalvata = await addTema(nouaTema);
+            setTeme((prev) => [...prev, temaSalvata]);
+        } catch (err) {
+            alert("Nu s-a putut adăuga tema: " + err.message);
+        }
+    }
 
     function handleToggle(id) {
         setTeme((prev) =>
@@ -52,12 +77,24 @@ export default function App() {
 
             <main className="container">
                 <section className="panel">
+                    <TemaForm onAdd={handleAddTema} />
+                </section>
+
+                <section className="panel">
                     <h2>Temele mele</h2>
-                    <TemeList
-                        teme={teme}
-                        onToggle={handleToggle}
-                        onDelete={handleDelete}
-                    />
+                    {loading && <p className="info">Se încarcă lista...</p>}
+                    {error && (
+                        <p className="error">
+                            Nu am putut încărca datele: {error}. Rulează <code>npm run api</code>?
+                        </p>
+                    )}
+                    {!loading && !error && (
+                        <TemeList
+                            teme={teme}
+                            onToggle={handleToggle}
+                            onDelete={handleDelete}
+                        />
+                    )}
                 </section>
             </main>
         </>

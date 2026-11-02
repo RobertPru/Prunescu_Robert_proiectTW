@@ -50,3 +50,7 @@ The list lives in React state. Checking and deleting work from the page, and the
 | S5-R2 | toggling changes state and card look | [frontend/src/components/TemaCard.jsx#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/components/TemaCard.jsx) | click a checkbox |
 | S5-R5 | immutable updates (no push, splice, assignment) | [frontend/src/App.jsx#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/App.jsx) | read |
 | S5-R6 | light/dark toggle: state + data-theme on html |  [frontend/src/App.css#L..](https://github.com/RobertPru/Prunescu_Robert_proiectTW/blob/main/frontend/src/App.css) | click the button, both system themes |
+## Stage 6: data from a mock API
+The list is served by json-server from `db.json`. The app fetches it on load and shows a loading state and an error state.
+- terminal 1, `npm run api` -> http://localhost:3001
+- terminal 2, `npm run dev` -> http://localhost:5173

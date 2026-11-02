@@ -1,0 +1,46 @@
+{
+  "teme": [
+    {
+      "id": 1,
+      "titlu": "Stage 1 Mockup",
+      "predat": false,
+      "dificultate": "medie",
+      "materie": "WebTech"
+    },
+    {
+      "id": 2,
+      "titlu": "SQL Queries lab",
+      "predat": true,
+      "dificultate": "ridicata",
+      "materie": "Databases"
+    },
+    {
+      "id": 3,
+      "titlu": "Math Homework 3",
+      "predat": false,
+      "dificultate": "scazuta",
+      "materie": "Math"
+    },
+    {
+      "id": 4,
+      "titlu": "Proiect Tehnologii Web",
+      "predat": false,
+      "dificultate": "ridicata",
+      "materie": "WebTech"
+    },
+    {
+      "id": 5,
+      "titlu": "Antrenament",
+      "predat": true,
+      "dificultate": "scazuta",
+      "materie": "Sport"
+    },
+    {
+      "titlu": "dwasd",
+      "materie": "wdasd",
+      "dificultate": "ridicata",
+      "predat": false,
+      "id": 6
+    }
+  ]
+}
