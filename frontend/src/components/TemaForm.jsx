@@ -1,10 +1,6 @@
 import { useState } from "react";
-
-const DIFICULTATI = [
-    { value: "scazuta", label: "Scăzută" },
-    { value: "medie", label: "Medie" },
-    { value: "ridicata", label: "Ridicată" },
-];
+import { DIFICULTATI } from "../constants.js";
+import styles from "./TemaForm.module.css";
 
 const TITLU_MAX = 100;
 const MATERIE_MAX = 50;
@@ -54,14 +50,14 @@ export default function TemaForm({ onAdd }) {
     }
 
     return (
-        <form className="tema-form" onSubmit={handleSubmit} noValidate data-testid="form">
+        <form className={styles.form} onSubmit={handleSubmit} noValidate data-testid="form">
             <label>
                 Titlu
                 <input
                     type="text"
                     value={titlu}
                     onChange={(e) => setTitlu(e.target.value)}
-                    placeholder="Ex: Laborator 7 React"
+                    placeholder="Ex: Laborator 8 React Router"
                     maxLength={TITLU_MAX}
                     aria-invalid={Boolean(eroare)}
                     data-testid="form-title"
@@ -102,7 +98,7 @@ export default function TemaForm({ onAdd }) {
                 </p>
             )}
 
-            <button type="submit" disabled={trimite} data-testid="form-submit">
+            <button type="submit" className="btn" disabled={trimite} data-testid="form-submit">
                 {trimite ? "Se salvează..." : "Adaugă"}
             </button>
         </form>

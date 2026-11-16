@@ -1,21 +1,40 @@
 export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
 
-export async function fetchTeme() {
-    const res = await fetch(`${API_URL}/teme`);
+async function request(path, options = {}) {
+    const res = await fetch(`${API_URL}${path}`, {
+        ...options,
+        headers: { "Content-Type": "application/json", ...options.headers },
+    });
     if (!res.ok) {
         throw new Error(`Eroare server: ${res.status}`);
     }
-    return res.json();
+    return res.status === 204 ? null : res.json();
 }
 
-export async function addTema(nouaTema) {
-    const res = await fetch(`${API_URL}/teme`, {
+export function fetchTeme() {
+    return request("/teme");
+}
+
+export function fetchTema(id) {
+    return request(`/teme/${id}`);
+}
+
+export function createTema(tema) {
+    return request("/teme", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nouaTema)
+        body: JSON.stringify(tema),
     });
-    if (!res.ok) {
-        throw new Error(`Eroare la adăugare: ${res.status}`);
-    }
-    return res.json();
+}
+
+export function updateTema(id, changes) {
+    return request(`/teme/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(changes),
+    });
+}
+
+export function deleteTema(id) {
+    return request(`/teme/${id}`, {
+        method: "DELETE",
+    });
 }

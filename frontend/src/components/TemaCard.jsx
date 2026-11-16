@@ -1,27 +1,36 @@
-const ETICHETE_DIFICULTATE = { scazuta: "scăzută", medie: "medie", ridicata: "ridicată" };
+import { Link } from "react-router-dom";
+import { ETICHETE_DIFICULTATE } from "../constants.js";
+import styles from "./TemaCard.module.css";
 
 export default function TemaCard({ tema, onToggle, onDelete }) {
     return (
         <li
-            className={tema.predat ? "item-card done" : "item-card"}
+            className={tema.predat ? `${styles.card} ${styles.done}` : styles.card}
             data-testid="item"
             data-id={tema.id}
         >
-            <label className="item-main">
+            <div className={styles.main}>
                 <input
                     type="checkbox"
                     checked={tema.predat}
                     onChange={() => onToggle(tema.id)}
+                    aria-label={`Marchează ${tema.titlu}`}
                     data-testid="item-toggle"
                 />
                 <div>
-                    <h3 data-testid="item-title">{tema.titlu}</h3>
+                    <Link
+                        to={`/teme/${tema.id}`}
+                        className={styles.title}
+                        data-testid="item-link"
+                    >
+                        {tema.titlu}
+                    </Link>
                     <span className={`badge badge-${tema.dificultate}`}>
                         {tema.materie ? `${tema.materie} · ` : ""}
                         {ETICHETE_DIFICULTATE[tema.dificultate] ?? tema.dificultate}
                     </span>
                 </div>
-            </label>
+            </div>
             <button
                 className="btn-danger"
                 onClick={() => onDelete(tema.id)}
