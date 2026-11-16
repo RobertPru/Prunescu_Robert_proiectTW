@@ -1,0 +1,9 @@
+{
+  "resource": "teme",
+  "title": "titlu",
+  "done": "predat",
+  "sample": {
+    "materie": "WebTech",
+    "dificultate": "medie"
+  }
+}

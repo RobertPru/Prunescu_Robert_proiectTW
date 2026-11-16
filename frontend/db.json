@@ -41,6 +41,13 @@
       "dificultate": "ridicata",
       "predat": false,
       "id": 6
+    },
+    {
+      "titlu": "dwawd",
+      "materie": "dwa",
+      "dificultate": "medie",
+      "predat": false,
+      "id": 7
     }
   ]
 }

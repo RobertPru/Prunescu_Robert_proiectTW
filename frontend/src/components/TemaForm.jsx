@@ -1,79 +1,109 @@
 import { useState } from "react";
 
+const DIFICULTATI = [
+    { value: "scazuta", label: "Scăzută" },
+    { value: "medie", label: "Medie" },
+    { value: "ridicata", label: "Ridicată" },
+];
+
+const TITLU_MAX = 100;
+const MATERIE_MAX = 50;
+
 export default function TemaForm({ onAdd }) {
     const [titlu, setTitlu] = useState("");
     const [materie, setMaterie] = useState("");
     const [dificultate, setDificultate] = useState("medie");
-    const [error, setError] = useState("");
+    const [eroare, setEroare] = useState("");
+    const [trimite, setTrimite] = useState(false);
 
-    function handleSubmit(e) {
+    function valideaza() {
+        const t = titlu.trim();
+        const m = materie.trim();
+        if (t === "") return "Titlul este obligatoriu.";
+        if (t.length > TITLU_MAX) return `Titlul are maximum ${TITLU_MAX} de caractere.`;
+        if (m === "") return "Materia este obligatorie.";
+        if (m.length > MATERIE_MAX) return `Materia are maximum ${MATERIE_MAX} de caractere.`;
+        return "";
+    }
+
+    async function handleSubmit(e) {
         e.preventDefault();
-
-        if (!titlu.trim()) {
-            setError("Titlul temei este obligatoriu!");
+        const mesaj = valideaza();
+        if (mesaj) {
+            setEroare(mesaj);
             return;
         }
 
-        if (!materie.trim()) {
-            setError("Materia este obligatorie!");
-            return;
+        setEroare("");
+        setTrimite(true);
+        try {
+            await onAdd({
+                titlu: titlu.trim(),
+                materie: materie.trim(),
+                dificultate,
+                predat: false,
+            });
+            setTitlu("");
+            setMaterie("");
+            setDificultate("medie");
+        } catch (err) {
+            setEroare(err.message);
+        } finally {
+            setTrimite(false);
         }
-
-        setError("");
-        onAdd({
-            titlu: titlu.trim(),
-            materie: materie.trim(),
-            dificultate,
-            predat: false
-        });
-
-        setTitlu("");
-        setMaterie("");
-        setDificultate("medie");
     }
 
     return (
-        <form className="form-panel" onSubmit={handleSubmit}>
-            <h2>Adaugă temă</h2>
-            {error && <p className="error-message">{error}</p>}
-
-            <div className="form-group">
-                <label htmlFor="titlu">Titlu temă</label>
+        <form className="tema-form" onSubmit={handleSubmit} noValidate data-testid="form">
+            <label>
+                Titlu
                 <input
-                    id="titlu"
                     type="text"
-                    placeholder="Ex: Laborator 7 React"
                     value={titlu}
                     onChange={(e) => setTitlu(e.target.value)}
+                    placeholder="Ex: Laborator 7 React"
+                    maxLength={TITLU_MAX}
+                    aria-invalid={Boolean(eroare)}
+                    data-testid="form-title"
                 />
-            </div>
+            </label>
 
-            <div className="form-group">
-                <label htmlFor="materie">Materie</label>
+            <label>
+                Materie
                 <input
-                    id="materie"
                     type="text"
-                    placeholder="Ex: WebTech"
                     value={materie}
                     onChange={(e) => setMaterie(e.target.value)}
+                    placeholder="Ex: WebTech"
+                    maxLength={MATERIE_MAX}
+                    aria-invalid={Boolean(eroare)}
+                    data-testid="form-materie"
                 />
-            </div>
+            </label>
 
-            <div className="form-group">
-                <label htmlFor="dificultate">Dificultate</label>
+            <label>
+                Dificultate
                 <select
-                    id="dificultate"
                     value={dificultate}
                     onChange={(e) => setDificultate(e.target.value)}
+                    data-testid="form-dificultate"
                 >
-                    <option value="scazuta">Scăzută</option>
-                    <option value="medie">Medie</option>
-                    <option value="ridicata">Ridicată</option>
+                    {DIFICULTATI.map((d) => (
+                        <option key={d.value} value={d.value}>
+                            {d.label}
+                        </option>
+                    ))}
                 </select>
-            </div>
+            </label>
 
-            <button type="submit" className="btn-primary">
-                Adaugă
+            {eroare && (
+                <p className="error" data-testid="form-error">
+                    {eroare}
+                </p>
+            )}
+
+            <button type="submit" disabled={trimite} data-testid="form-submit">
+                {trimite ? "Se salvează..." : "Adaugă"}
             </button>
         </form>
     );

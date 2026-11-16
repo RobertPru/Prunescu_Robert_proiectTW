@@ -2,7 +2,11 @@ import TemaCard from "./TemaCard.jsx";
 
 export default function TemeList({ teme, onToggle, onDelete }) {
     if (teme.length === 0) {
-        return <p className="empty">Nu există nicio temă.</p>;
+        return (
+            <p className="empty" data-testid="empty">
+                Nu există nicio temă.
+            </p>
+        );
     }
 
     return (

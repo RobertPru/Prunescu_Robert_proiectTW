@@ -78,9 +78,15 @@ body {
     margin: 24px auto;
     padding: 0 16px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 2fr;
     gap: 24px;
     align-items: start;
+}
+
+@media (max-width: 700px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .panel {
@@ -90,6 +96,55 @@ body {
     padding: 24px;
 }
 .panel h2 { margin-top: 0; }
+
+.tema-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.tema-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tema-form input,
+.tema-form select {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    font: inherit;
+}
+
+.tema-form input[aria-invalid="true"] {
+    border-color: var(--color-ridicata);
+}
+
+.tema-form button {
+    padding: 10px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tema-form button:hover:not(:disabled) {
+    background: var(--accent-dark);
+}
+
+.tema-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 .item-list {
     list-style: none;
@@ -148,9 +203,6 @@ body {
     text-decoration: line-through;
     color: var(--muted);
 }
-.item-card.done .status {
-    color: var(--muted);
-}
 
 .btn-danger {
     border: 1px solid var(--color-ridicata);
@@ -176,7 +228,6 @@ body {
     font-style: italic;
 }
 
-/* Etapa 6: stări de încărcare și de eroare */
 .info { color: var(--muted); }
 .error {
     color: var(--color-ridicata);
@@ -184,65 +235,5 @@ body {
     border: 1px solid var(--error-border);
     border-radius: 8px;
     padding: 10px 12px;
-}
-/* Layout 2 coloane pe ecrane mari */
-@media (min-width: 768px) {
-    .container {
-        grid-template-columns: 320px 1fr;
-    }
-}
-
-/* Stiluri Formular */
-.form-panel h2 {
-    margin-top: 0;
-    margin-bottom: 16px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
-.form-group label {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group select {
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--card);
-    color: var(--text);
-    font: inherit;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: 2px solid var(--accent);
-}
-
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-primary:hover {
-    background: var(--accent-dark);
-}
-
-.error-message {
-    color: var(--color-ridicata);
-    font-size: 13px;
-    margin-bottom: 10px;
+    margin: 0;
 }
